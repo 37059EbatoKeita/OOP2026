@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "DistancrConverter": {
+      "commandName": "Project",
+      "commandLineArgs": "-tom"
+    }
+  }
+}
