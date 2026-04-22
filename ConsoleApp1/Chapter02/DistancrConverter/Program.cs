@@ -8,11 +8,11 @@ namespace DistancrConverter
 
             if (args.Length >= 1 && args[0] == "-tom")
             {
-                PrintFeetToMeterList(1, 10);
+                PrintFeetToMeterList(10, 30);
             }
             else if (args.Length >= 1 && args[0] == "-tof")
             {
-                PrintMeterToFeetList(1, 10);
+                PrintMeterToFeetList(5, 15);
             }
             else
             {
