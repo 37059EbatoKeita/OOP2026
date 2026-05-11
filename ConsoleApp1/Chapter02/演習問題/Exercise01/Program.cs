@@ -16,10 +16,10 @@ namespace Exercise01 {
         //2.1.4
         private static void PrintSongs(Song[] songs) {
             foreach (var song in songs) {
-                Console.WriteLine($"{song.Title},{song.ArtistName},{song.Length / 60}");
+                var minutes = song.Length / 60;
+                var seconds = song.Length % 60;
+                Console.WriteLine($"{song.Title},{song.ArtistName},{minutes}:{seconds:00}");
             }
-
-
         }
     }
 }
