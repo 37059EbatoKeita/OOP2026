@@ -15,11 +15,9 @@ namespace Exercise01 {
         //Mainメソッド内のPrintSongs(songs); をクリックしてAlt + Enterを押してメソッドを生成するを選択すると、以下のメソッドが自動的に作成される
         //2.1.4
         private static void PrintSongs(Song[] songs) {
-
-
-
-
-
+            foreach (var song in songs) {
+                Console.WriteLine($"{song.Title},{song.ArtistName},{song.Length}");
+            }
 
         }
     }
