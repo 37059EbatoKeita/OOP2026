@@ -15,11 +15,11 @@ namespace SalesCalculator {
         }
 
        public IEnumerable<Sale> ReadSales(string filepath) {
-            List<Sale> sales = new List<Sale>();   //リスト
-            string[] lines = File.ReadAllLines(filepath);
-            foreach (string line in lines) {
-                string[] items = line.Split(',');  //カンマ区切りで分割
-                Sale sale = new Sale {
+            var sales = new List<Sale>();   //リスト
+            var lines = File.ReadAllLines(filepath);
+            foreach (var line in lines) {
+                var items = line.Split(',');  //カンマ区切りで分割
+                var sale = new Sale {
                     ShopName = items[0],
                     ProductCategory = items[1],
                     Amount = int.Parse(items[2]),
@@ -40,7 +40,6 @@ namespace SalesCalculator {
                 else
                     //未登録の場合
                     dict[sale.ShopName] = sale.Amount; //新規に売上を登録
-
             }
             return dict;
         }
