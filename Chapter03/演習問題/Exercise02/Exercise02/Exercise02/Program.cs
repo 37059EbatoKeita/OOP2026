@@ -35,7 +35,8 @@
 
         private static void Exercise2_2(List<string> cities) {
             //できたらGitのコメント「問題3.2.2完成」
-
+            var count = cities.Count(c => c.Contains("o"));
+            Console.WriteLine(count);
         }
 
         private static void Exercise2_3(List<string> cities) {
