@@ -41,7 +41,10 @@
 
         private static void Exercise2_3(List<string> cities) {
             //できたらGitのコメント「問題3.2.3完成」
-
+            var selected = cities.Where(s => s.Contains("o")).ToArray();
+            foreach (var name in selected) {
+                Console.WriteLine(name);
+            }
         }
 
         private static void Exercise2_4(List<string> cities) {
