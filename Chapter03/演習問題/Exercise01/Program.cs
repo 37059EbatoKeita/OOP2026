@@ -37,8 +37,8 @@ namespace Exercise01 {
             numbers.Where(n => n > 50).ToList().ForEach(n => Console.WriteLine(n));
         }
         
-
         private static void Exercise4(List<int> numbers) {
+            numbers.Select(n => n * 2).ToList().ForEach(n => Console.WriteLine(n));
 
         }
     }
