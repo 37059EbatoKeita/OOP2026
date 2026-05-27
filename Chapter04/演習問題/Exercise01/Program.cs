@@ -36,25 +36,25 @@ namespace Exercise01 {
             Console.WriteLine("\nwhile文で出力");
             int index = 0;
             while (index < langs.Count) {
-                if (langs[index].Contains('S')) 
+                if (langs[index].Contains('S'))
                     Console.WriteLine(langs[index]);
-                    index++;
-                }
+                index++;
             }
-        
-        
-
+        }
 
         private static void Exercise2(List<string> langs) {
             var selected = langs.Where(s => s.Contains('S'));
-            foreach(var lang in selected) {
+            foreach (var lang in selected) {
                 Console.WriteLine(lang);
             }
-            
         }
 
         private static void Exercise3(List<string> langs) {
-            
+            var lang = langs.Find(s => s.Length >= 10);
+
+
+            Console.WriteLine();
         }
     }
 }
+
