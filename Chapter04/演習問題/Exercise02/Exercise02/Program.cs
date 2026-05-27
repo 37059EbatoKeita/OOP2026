@@ -15,12 +15,23 @@
             string? inputNumber = Console.ReadLine();
             if (!int.TryParse(inputNumber, out var number)) {
                 Console.WriteLine("入力値に誤りがあります");
-
             }
+            if (number < 0) {
+                Console.WriteLine(number);
+            } else if (number < 100) {
+                Console.WriteLine(number * 2);
+            } else if (number < 500) {
+                Console.WriteLine(number * 3);
+            } else {
+                Console.WriteLine(number);
+            }
+
         }
+        
 
         private static void Exercise2() {
             //switch文を使用
+
 
         }
 
