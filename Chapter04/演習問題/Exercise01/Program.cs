@@ -46,6 +46,10 @@ namespace Exercise01 {
 
 
         private static void Exercise2(List<string> langs) {
+            var selected = langs.Where(s => s.Contains('S'));
+            foreach(var lang in selected) {
+                Console.WriteLine(lang);
+            }
             
         }
 
