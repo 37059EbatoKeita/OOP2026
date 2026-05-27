@@ -53,7 +53,18 @@
 
         private static void Exercise3() {
             //switch式を使用
-
+            Console.Write("数値を入力してください" + ":");
+            string? inputNumber = Console.ReadLine();
+            if (!int.TryParse(inputNumber, out var number)) {
+                Console.WriteLine("入力値に誤りがあります");
+            }
+            var text = number switch {
+                < 0 => number,
+                < 100 => number * 2,
+                < 500 => number * 3,
+                _ => number,
+            };
+            Console.WriteLine(text);
 
         }
     }
