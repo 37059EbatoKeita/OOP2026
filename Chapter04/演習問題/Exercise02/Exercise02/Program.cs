@@ -31,6 +31,22 @@
 
         private static void Exercise2() {
             //switch文を使用
+            Console.Write("数値を入力してください" + ":");
+            string? inputNumber = Console.ReadLine();
+            if (!int.TryParse(inputNumber, out var number)) {
+                Console.WriteLine("入力値に誤りがあります");
+            }
+            switch (number) {
+                case < 0:
+                    Console.WriteLine(number);
+                    break;
+                case < 100:
+                    Console.WriteLine(number * 2);
+                    break;
+                case < 500:
+                    Console.WriteLine(number * 3);
+                    break;
+            }
 
 
         }
