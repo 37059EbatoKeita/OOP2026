@@ -1,0 +1,57 @@
+﻿
+using System.Collections.ObjectModel;
+
+namespace Exercise01 {
+    internal class Program {
+        static void Main(string[] args) {
+            List<string> langs = [
+               "C#", "Java", "Ruby", "PHP", "Python", "TypeScript",
+               "JavaScript", "Swift", "Go",
+            ];
+
+            Exercise1(langs);
+            Console.WriteLine("---");
+            Exercise2(langs);
+            Console.WriteLine("---");
+            Exercise3(langs);
+        }
+
+        private static void Exercise1(List<string> langs) {
+            //foreach文
+            Console.WriteLine("foreach文で出力");
+            foreach (var n in langs) {
+                if (n.Contains('S')) {
+                    Console.WriteLine(n);
+                }
+            }
+
+
+
+            //for文
+            Console.WriteLine("\nfor文で出力");
+            for (int i = 0; i < langs; i++) {
+                
+                    
+                
+                Console.WriteLine(langs[i]);
+            }
+
+
+
+            //while文
+            Console.WriteLine("\nwhile文で出力");
+            while (true) {
+                
+            }
+        }
+
+
+        private static void Exercise2(List<string> langs) {
+            
+        }
+
+        private static void Exercise3(List<string> langs) {
+            
+        }
+    }
+}

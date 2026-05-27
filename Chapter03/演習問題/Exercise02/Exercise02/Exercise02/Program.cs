@@ -49,8 +49,7 @@
 
         private static void Exercise2_4(List<string> cities) {
             //できたらGitのコメント「問題3.2.4完成」
-            var query = cities.Where(s => s.StartsWith('B'))
-                　　　　　　　　　　　　　　　.Select(s => new { s, s.Length });
+            var query = cities.Where(s => s.StartsWith('B')).Select(s => new { s, s.Length });
 
 
             foreach (var data in query) { 
