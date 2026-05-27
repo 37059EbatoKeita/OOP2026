@@ -25,25 +25,23 @@ namespace Exercise01 {
                 }
             }
 
-
-
             //for文
             Console.WriteLine("\nfor文で出力");
-            for (int i = 0; i < langs; i++) {
-                
-                    
-                
+            for (int i = 0; i < langs.Count; i++) {
+                if (langs[i].Contains("S"))                
                 Console.WriteLine(langs[i]);
             }
 
-
-
             //while文
             Console.WriteLine("\nwhile文で出力");
-            while (true) {
+            int index = 0;
+            while(index < langs.Count) {
+                if (langs[index].Contains("S"))
+                    Console.WriteLine(langs[index]);
+            }
                 
             }
-        }
+        
 
 
         private static void Exercise2(List<string> langs) {
