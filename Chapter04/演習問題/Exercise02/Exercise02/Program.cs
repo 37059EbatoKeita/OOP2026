@@ -1,4 +1,6 @@
-﻿namespace Exercise02 {
+﻿using System.ComponentModel.Design;
+
+namespace Exercise02 {
     internal class Program {
         static void Main(string[] args) {
             Console.WriteLine(" --- 4.2.1 ---");
@@ -12,60 +14,63 @@
         private static void Exercise1() {
             //if-else文を使用
             Console.Write("数値を入力してください" + ":");
-            string? inputNumber = Console.ReadLine();
-            if (!int.TryParse(inputNumber, out var number)) {
-                Console.WriteLine("入力値に誤りがあります");
-            }
-            if (number < 0) {
-                Console.WriteLine(number);
-            } else if (number < 100) {
-                Console.WriteLine(number * 2);
-            } else if (number < 500) {
-                Console.WriteLine(number * 3);
+            var line = Console.ReadLine();
+            if (int.TryParse(line, out var num)) {
+            if (num < 0) {
+                Console.WriteLine(num);
+            } else if (num < 100) {
+                Console.WriteLine(num * 2);
+            } else if (num < 500) {
+                Console.WriteLine(num * 3);
             } else {
-                Console.WriteLine(number);
+                Console.WriteLine(num);
             }
+        }else{
+                Console.WriteLine("入力値に誤りがあります");
+    }
+}
 
-        }
-        
 
         private static void Exercise2() {
             //switch文を使用
             Console.Write("数値を入力してください" + ":");
-            string? inputNumber = Console.ReadLine();
-            if (!int.TryParse(inputNumber, out var number)) {
+            var line = Console.ReadLine();
+            if (int.TryParse(line, out var num)) {
+                switch (num) {
+                    case < 0:
+                        Console.WriteLine(num);
+                        break;
+                    case < 100:
+                        Console.WriteLine(num * 2);
+                        break;
+                    case < 500:
+                        Console.WriteLine(num * 3);
+                        break;
+
+                    default:
+                        Console.WriteLine(num);
+                        break;
+                }
+            }else{
                 Console.WriteLine("入力値に誤りがあります");
             }
-            switch (number) {
-                case < 0:
-                    Console.WriteLine(number);
-                    break;
-                case < 100:
-                    Console.WriteLine(number * 2);
-                    break;
-                case < 500:
-                    Console.WriteLine(number * 3);
-                    break;
-            }
-
-
         }
 
         private static void Exercise3() {
             //switch式を使用
             Console.Write("数値を入力してください" + ":");
-            string? inputNumber = Console.ReadLine();
-            if (!int.TryParse(inputNumber, out var number)) {
+            var line = Console.ReadLine();
+            if (int.TryParse(line, out var num)) {
+                var outnum = num switch {
+                    < 0 => num,
+                    < 100 => num * 2,
+                    < 500 => num * 3,
+                    _ => num
+                };
+                Console.WriteLine(outnum);
+            }else{
                 Console.WriteLine("入力値に誤りがあります");
             }
-            var text = number switch {
-                < 0 => number,
-                < 100 => number * 2,
-                < 500 => number * 3,
-                _ => number,
-            };
-            Console.WriteLine(text);
-
         }
     }
 }
