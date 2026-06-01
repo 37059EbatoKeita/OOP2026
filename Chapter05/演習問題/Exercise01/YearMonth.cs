@@ -14,11 +14,7 @@ namespace Exercise01 {
             Year = Year;
             Month = Month;
         }
-        public void ChangeYear(string count) {
-            Year = count;
-        }
-        public void ChangeMonth(string count) {
-            Month = count;
+   
         }
     }
-}
+
