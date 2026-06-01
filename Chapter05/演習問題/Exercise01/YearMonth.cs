@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 namespace Exercise01 {
     //5.1.1
     public class YearMonth {
-        public string Year { get; private set; }
-        public string Month { get; private set; }
+        public string Year { get; init; }
+        public string Month { get; init; }
 
         public YearMonth(string Year, string Month) {
             Year = Year;
