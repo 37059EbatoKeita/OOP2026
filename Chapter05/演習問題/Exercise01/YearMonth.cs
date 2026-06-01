@@ -14,7 +14,8 @@ namespace Exercise01 {
             Year = Year;
             Month = Month;
         }
-   
+        //5.1.2
+        public bool Is21Century => YearMonth + Is21Century;
         }
     }
 
