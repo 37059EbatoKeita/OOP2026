@@ -1,4 +1,5 @@
 ﻿using Exercise01;
+using System.ComponentModel.Design;
 
 namespace Exercise02 {
     internal class Program {
@@ -28,7 +29,20 @@ namespace Exercise02 {
                 Console.WriteLine(ym);
             }
         }
-
+        //5.2.3
+        private static YearMonth? FindFirst21C(YearMonth[] ymCollection) {
+            foreach (var ym in ymCollection) {
+                if (ym.Is21Century) {
+                    return ym; //21世紀が見つかったら終了
+                } else {
+                    return null; //21世紀が見つからなかった場合
+                }
+            }
+        }
+        
+        
+        
+        
         private static void Exercise4(YearMonth[] ymCollection) {
             
         }
