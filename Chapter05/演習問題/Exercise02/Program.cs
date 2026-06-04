@@ -34,15 +34,11 @@ namespace Exercise02 {
             foreach (var ym in ymCollection) {
                 if (ym.Is21Century) {
                     return ym; //21世紀が見つかったら終了
-                } else {
-                    return null; //21世紀が見つからなかった場合
                 }
             }
+            return null; //21世紀が見つからなかった場合
         }
-        
-        
-        
-        
+        //5.2.4
         private static void Exercise4(YearMonth[] ymCollection) {
             
         }
