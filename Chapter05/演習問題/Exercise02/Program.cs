@@ -1,5 +1,6 @@
 ﻿using Exercise01;
 using System.ComponentModel.Design;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Exercise02 {
     internal class Program {
@@ -46,10 +47,18 @@ namespace Exercise02 {
             else {
                 Console.WriteLine(ym.Year);
             }
-        }
 
+            //null合体演算子、null条件演算子を使って1行に
+            Console.WriteLine(FindFirst21C(ymCollection)?.ToString() ?? "21世紀のデータはありません");
+
+
+
+
+        }
+        //5.2.5
         private static void Exercise5(YearMonth[] ymCollection) {
-            
+            var array = ymCollection.Select(ym => ym.AddOneMonth()).ToArray();
+            Exercise2(array);
         }
     }
 }
