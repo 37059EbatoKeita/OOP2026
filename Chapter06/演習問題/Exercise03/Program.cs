@@ -24,13 +24,18 @@
         }
 
         private static void Exercise1(string text) {
-            Console.WriteLine("空白数");
-            var count = text.Count(c => c == ' ' );
-            Console.WriteLine(count);
+            var spaces = text.Count(c => c == ' ' );
+            Console.WriteLine($"空白数:{spaces}");
         }
 
         private static void Exercise2(string text) {
-
+            Console.Write("検索");
+            var search = Console.ReadLine();
+            Console.Write("置換");
+            var replace = Console.ReadLine();
+           
+            var replaced = text.Replace(search,replace);
+            Console.WriteLine(replaced); 
         }
 
         private static void Exercise3(string text) {
