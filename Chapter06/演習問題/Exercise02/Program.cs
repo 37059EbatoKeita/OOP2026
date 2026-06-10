@@ -8,9 +8,6 @@
             } else {
                 Console.WriteLine("整数文字列でありません");
             }
-            
-
-           
             }
         }
     }
