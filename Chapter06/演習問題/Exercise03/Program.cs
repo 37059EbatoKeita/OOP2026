@@ -1,4 +1,7 @@
-﻿namespace Exercise03 {
+﻿using System.Diagnostics.Metrics;
+using System.Linq;
+
+namespace Exercise03 {
     internal class Program {
         static void Main(string[] args) {
             var text = "Jackdaws love my big sphinx of quartz";
@@ -43,7 +46,10 @@
         }
 
         private static void Exercise4(string text) {
-
+            var text = "Jackdaws love my big sphinx of quartz";
+            string[] words = text.Split(' ');
+            var count = count(text, n => n.ToString().Contains(' '));
+            Console.WriteLine(count);
         }
 
         private static void Exercise5(string text) {
