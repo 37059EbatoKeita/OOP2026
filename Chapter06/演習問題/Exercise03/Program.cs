@@ -51,7 +51,7 @@ namespace Exercise03 {
         }
 
         private static void Exercise5(string text) {
-
+            text.Split(' ').Where(s => s.Length <= 4).ToList().ForEach(Console.WriteLine);  //即時実行
         }
 
         private static void Exercise6(string text) {
