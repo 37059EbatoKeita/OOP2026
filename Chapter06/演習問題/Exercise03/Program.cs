@@ -46,10 +46,8 @@ namespace Exercise03 {
         }
 
         private static void Exercise4(string text) {
-            var text = "Jackdaws love my big sphinx of quartz";
-            string[] words = text.Split(' ');
-            var count = count(text, n => n.ToString().Contains(' '));
-            Console.WriteLine(count);
+            var count = text.Split(' ').Length;
+            Console.WriteLine($"単語数:{count}");
         }
 
         private static void Exercise5(string text) {
