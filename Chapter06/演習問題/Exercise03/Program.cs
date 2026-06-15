@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.Metrics;
 using System.Linq;
+using System.Text;
 
 namespace Exercise03 {
     internal class Program {
@@ -42,7 +43,21 @@ namespace Exercise03 {
         }
 
         private static void Exercise3(string text) {
+            var array = text.Split(' ');
+            var sb = new StringBuilder(array[0]);
 
+            //sb.Append(array[0]);
+            //for(int i = 1; i < array.Length; i++) {
+            //    sb.Append(' ');
+            //    sb.Append(array[i]);
+            //}
+
+            foreach (var word in array.Skip(1)) {
+                sb.Append(' ');
+                sb.Append(word);            
+            }
+            //末尾はピリオド(.)で終わる
+            Console.WriteLine(sb + ".");
         }
 
         private static void Exercise4(string text) {
