@@ -84,8 +84,6 @@ namespace Exercise03 {
             for (char ch = 'a' ; ch <= 'z' ; ch++) {
                 Console.WriteLine($"{ch}:{str.Count(c => c == ch)}");
             }
-
-
         }
     }
 }
