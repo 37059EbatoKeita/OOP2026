@@ -1,4 +1,6 @@
-﻿namespace Exercise01 {
+﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace Exercise01 {
     internal class Program {
         static void Main(string[] args) {
             int[] numbers = [5, 10, 17, 9, 3, 21, 10, 40, 21, 3, 35];
@@ -27,7 +29,10 @@
         }
 
         private static void Exercise2(int[] numbers) {
-        
+            var str = numbers.TakeLast(2);
+            foreach (var number in str) {
+                Console.WriteLine(number);
+            }
         }
 
         private static void Exercise3(int[] numbers) {
