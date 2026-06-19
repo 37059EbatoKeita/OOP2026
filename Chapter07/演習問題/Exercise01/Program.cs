@@ -36,7 +36,8 @@ namespace Exercise01 {
         }
 
         private static void Exercise3(int[] numbers) {
-        
+            var strings = numbers.Select(s => s.ToString("0")).ToArray();
+            Console.WriteLine(strings);
         }
 
         private static void Exercise4(int[] numbers) {
