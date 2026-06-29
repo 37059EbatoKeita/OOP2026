@@ -22,22 +22,21 @@ namespace Section01 {
                 Console.Write("県庁所在地:");
                 prefCaptallocation = Console.ReadLine();
 
+                //既に都道府県が登録されているか？
+                if (prefOfficedict.ContainsKey(pref)) {
+                    Console.WriteLine("上書きしますか(Y/N)");
+                    if (Console.ReadLine() == "N") continue;
+                }
 
                 //③県庁所在地登録処理
-                public IDictionary<string> GetperS
-                foreach (var item in prefCaptallocation) {
+                prefOfficedict[pref] = prefCaptallocation;
 
+                Console.WriteLine(); //改行
 
-
-
-
-
-
-
-                }
             }
         }
-    
+
+
 
         //メニュー表示
         private static int menuDisp() {
@@ -47,26 +46,33 @@ namespace Section01 {
             Console.WriteLine("9:終了");
             Console.WriteLine(">");
 
-        //メニュー番号を入力させて呼び出し元へ返却
+            //メニュー番号を入力させて呼び出し元へ返却
+            return int.Parse(Console.ReadLine());
 
-            return
+
 
         }
 
         //一覧表示処理
         private static void allDisp() {
-
             //コレクション(prefOfficeDict)の中身をすべて出力
+            foreach (var p in prefOfficedict) {
+                Console.WriteLine($"{p.Key}の県庁所在地は{p.Value}です。");
+
+            }
         }
 
         //検索処理
         private static void searcPrefCaptalLocation() {
             Console.Write("都道府県");
-            String? searcPref = Console.ReadLine();
-
+            var searchPref = Console.ReadLine();
+            if (searchPref is null) return;
             //検索した結果を表示
-        }
+            if (prefOfficedict.ContainsKey(searchPref)) {
+                Console.WriteLine(searchPref + "の県庁所在地は" + prefOfficedict[searchPref] + "です。");
+            }
         }
     }
+}
 
 
