@@ -2,7 +2,7 @@
 
 namespace Section01 {
     internal class Program {
-        static private Dictionary<string, string> prefOfficedict = new Dictionary<string, string>();
+        static private Dictionary<string, string> prefOfficeDict = new Dictionary<string, string>();
 
         static void Main(string[] args) {
             string pref, prefCaptallocation;
@@ -23,16 +23,31 @@ namespace Section01 {
                 prefCaptallocation = Console.ReadLine();
 
                 //既に都道府県が登録されているか？
-                if (prefOfficedict.ContainsKey(pref)) {
+                if (prefOfficeDict.ContainsKey(pref)) {
                     Console.WriteLine("上書きしますか(Y/N)");
                     if (Console.ReadLine() == "N") continue;
                 }
 
                 //③県庁所在地登録処理
-                prefOfficedict[pref] = prefCaptallocation;
+                prefOfficeDict[pref] = prefCaptallocation;
 
                 Console.WriteLine(); //改行
+            }
+            Boolean endFlag = false;  //終了フラグ（メニューの無限ループを抜ける用）
+            while (!endFlag) {
+                switch (menuDisp()) {
+                    case 1: //一覧出力処理
+                        allDisp();
+                        break;
 
+                    case 2:
+                        searcPrefCaptalLocation();
+                        break;
+
+                    default:
+                        endFlag = true;
+                        break;
+                }
             }
         }
 
@@ -56,7 +71,7 @@ namespace Section01 {
         //一覧表示処理
         private static void allDisp() {
             //コレクション(prefOfficeDict)の中身をすべて出力
-            foreach (var p in prefOfficedict) {
+            foreach (var p in prefOfficeDict) {
                 Console.WriteLine($"{p.Key}の県庁所在地は{p.Value}です。");
 
             }
@@ -68,8 +83,8 @@ namespace Section01 {
             var searchPref = Console.ReadLine();
             if (searchPref is null) return;
             //検索した結果を表示
-            if (prefOfficedict.ContainsKey(searchPref)) {
-                Console.WriteLine(searchPref + "の県庁所在地は" + prefOfficedict[searchPref] + "です。");
+            if (prefOfficeDict.ContainsKey(searchPref)) {
+                Console.WriteLine(searchPref + "の県庁所在地は" + prefOfficeDict[searchPref] + "です。");
             }
         }
     }
