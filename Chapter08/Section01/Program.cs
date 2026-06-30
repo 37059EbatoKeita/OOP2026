@@ -30,7 +30,6 @@ namespace Section01 {
 
                 //③県庁所在地登録処理
                 prefOfficeDict[pref] = prefCaptallocation;
-
                 Console.WriteLine(); //改行
             }
             Boolean endFlag = false;  //終了フラグ（メニューの無限ループを抜ける用）

@@ -9,8 +9,20 @@
         }
 
         private static void Exercise1(string text) {
+            var dict = new Dictionary<char, int>();
+            var str = text.ToUpper();
+            foreach (var ch in text) {
+                if ('A' <= ch && ch <= 'Z') {
+                    if (dict.ContainsKey(text.))
 
+                    }
+                }
+            }
         }
+        
+
+            
+        
 
         private static void Exercise2(string text) {
 
