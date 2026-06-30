@@ -10,28 +10,42 @@
 
         private static void Exercise1(string text) {
             var dict = new Dictionary<char, int>();
-            foreach (var ch in text.ToUpper()){
+            foreach (var ch in text.ToUpper()) {
                 if ('A' <= ch && ch <= 'Z') {
-                    if (dict.ContainsKey(ch))                                  
-                        dict[ch]++; 
+                    if (dict.ContainsKey(ch))
+                        dict[ch]++;
                     else
-                        dict[ch] = 1; 
+                        dict[ch] = 1;
 
                 }
-                }
-            foreach (var item in dict.OrderBy(x => x.Key)){ 
+            }
+            foreach (var item in dict.OrderBy(x => x.Key)) {
                 Console.WriteLine("{0}:{1}", item.Key, item.Value);
-                
+
             }
         }
-    
-        
 
-            
-        
+
+
+
+
 
         private static void Exercise2(string text) {
+            var dict = new Dictionary<char, int>();
 
+            foreach (var ch in text.ToUpper()) {
+                if ('A' <= ch && ch <= 'Z') {
+                    if (dict.ContainsKey(ch))
+                        dict[ch]++;
+                    else
+                        dict[ch] = 1;
+
+                }
+            }
+
+            foreach (var item in dict) {
+                Console.WriteLine("{0}:{1}", item.Key, item.Value);
+            }
         }
     }
 }
