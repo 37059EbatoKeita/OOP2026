@@ -3,6 +3,8 @@
         static void Main(string[] args) {
             var abbrs = new Abbreviations();
 
+            Console.WriteLine("件数:" + abbrs.Count); //件数:18
+
             // Addメソッドの呼び出し例
             abbrs.Add("IOC", "国際オリンピック委員会");
             abbrs.Add("NPT", "核拡散防止条約");
