@@ -47,7 +47,6 @@ public class Abbreviations {
     // IEnumerable<KeyValuePair<TKey, TValue>>を実装しているので
     // _dictを返せば良い
     public IEnumerable<KeyValuePair<string, string>> GetAll() {
-
         return _dict;
     }
 }
