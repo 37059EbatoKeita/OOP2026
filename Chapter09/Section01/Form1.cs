@@ -1,3 +1,5 @@
+using System.Globalization;
+
 namespace Section01 {
     public partial class Form1 : Form {
         public Form1() {
@@ -7,41 +9,39 @@ namespace Section01 {
         }
 
         private void btGet_Click(object sender, EventArgs e) {
-            DateTime dt1 = dtpDate.Value;
-            DayOfWeek dayOfWeek = dt1.DayOfWeek;
+            DateTime date = dtpDate.Value;
+            tbOut.Text = date.AddDays((double)numDay.Value).ToString();
 
-            if (DateTime.IsLeapYear(2024)) {
-                tbOut.Text = "Ç§ÇÈÇ§îNÇ≈Ç∑";
-            } else {
-                tbOut.Text = "Ç§ÇÈÇ§îNÇ≈ÇÕÇ†ÇËÇ‹ÇπÇÒ";
+        }
+
+        private void btBathclk_Click(object sender, EventArgs e) {
+            DateTime birth = dtpBath.Value;  //ê∂Ç‹ÇÍÇΩì˙ït
+            DateTime today = DateTime.Today; //ç°ì˙ÇÃì˙ït
+
+            int age = today.Year - birth.Year;
+            if (today < birth.AddYears(age)) {
+                age--;
             }
-                switch (dayOfWeek) {
-                    case DayOfWeek.Saturday:
-                tbOut.Text = "ç°ì˙ÇÕìyójì˙Ç≈Ç∑";
-                break;
+            tbOut.Text = $"Ç†Ç»ÇΩÇÕ{age}çŒÇ≈Ç∑";
 
-            case DayOfWeek.Sunday:
-                tbOut.Text = "ç°ì˙ÇÕì˙ójì˙Ç≈Ç∑";
-                break;
 
-            case DayOfWeek.Monday:
-                tbOut.Text = "ç°ì˙ÇÕåéójì˙Ç≈Ç∑";
-                break;
-
-            case DayOfWeek.Tuesday:
-                tbOut.Text = "ç°ì˙ÇÕâŒójì˙Ç≈Ç∑";
-                break;
-
-            case DayOfWeek.Wednesday:
-                tbOut.Text = "ç°ì˙ÇÕêÖójì˙Ç≈Ç∑";
-                break;
-
-            case DayOfWeek.Thursday:
-                tbOut.Text = "ç°ì˙ÇÕñÿójì˙Ç≈Ç∑";
-                break;
-
-                
+            TimeSpan ts = today.Date - birth.Date;
+            tbOut2.Text = $"ê∂Ç‹ÇÍÇƒÇ©ÇÁ{ts.Days}ì˙ñ⁄Ç≈Ç∑";
+        }
+        //îNóÓÇãÅÇﬂÇÈÉÅÉ\ÉbÉh
+        static int GetAge(DateTime birth, DateTime today) {
+            var age = today.Year - birth.Year;
+            if (today < birth.AddYears(age)) {
+                age--;
             }
+            return age;
+        }
+        private void label4_Click(object sender, EventArgs e) {
+
+        }
+
+        private void dtpBath_ValueChanged(object sender, EventArgs e) {
+
         }
     }
 }
