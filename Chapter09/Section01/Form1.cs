@@ -18,16 +18,14 @@ namespace Section01 {
             DateTime birth = dtpBath.Value;  //生まれた日付
             DateTime today = DateTime.Today; //今日の日付
 
-            int age = today.Year - birth.Year;
-            if (today < birth.AddYears(age)) {
-                age--;
-            }
-            tbOut.Text = $"あなたは{age}歳です";
+            
+            tbOut.Text = $"あなたは{GetAge(birth,today)}歳です";
 
 
             TimeSpan ts = today.Date - birth.Date;
             tbOut2.Text = $"生まれてから{ts.Days}日目です";
         }
+
         //年齢を求めるメソッド
         static int GetAge(DateTime birth, DateTime today) {
             var age = today.Year - birth.Year;
