@@ -40,6 +40,7 @@
             btbutton1.TabIndex = 0;
             btbutton1.Text = "①";
             btbutton1.UseVisualStyleBackColor = true;
+            btbutton1.Click += btbutton1_Click;
             // 
             // tbOut1
             // 
@@ -58,6 +59,7 @@
             btbutton2.TabIndex = 0;
             btbutton2.Text = "②";
             btbutton2.UseVisualStyleBackColor = true;
+            btbutton2.Click += btbutton2_Click;
             // 
             // tbOut2
             // 
@@ -76,6 +78,7 @@
             btbutton3.TabIndex = 0;
             btbutton3.Text = "③";
             btbutton3.UseVisualStyleBackColor = true;
+            btbutton3.Click += btbutton3_Click;
             // 
             // tbOut3
             // 
