@@ -15,7 +15,7 @@ namespace Section01 {
             DateTime birth = dtpBath.Value.Date;  //生まれた日付
             DateTime today = DateTime.Today; //今日の日付
 
-            tbOut.Text = $"あなたは{GetAge(birth, today)}歳です";
+            tbOut.Text = $"あなたは{(birth, today)}歳です";
 
             TimeSpan ts = today.Date - birth.Date;
             tbOut2.Text = $"生まれてから{ts.Days}日目です";
@@ -41,7 +41,7 @@ namespace Section01 {
             if (span.Days == 0) {
                 tbOut4.Text = "誕生日は今日です。";
             } else {
-                tbOut4.Text = $"誕生日まで{span.Days}日後です。";
+                tbOut4.Text = $"誕生日まであと{span.Days}日後です。";
 
 
 
@@ -57,9 +57,7 @@ namespace Section01 {
             }
         }
 
-        private object GetAge(DateTime birth, DateTime today) {
-            throw new NotImplementedException();
-        }
+        
 
         //指定した日が第何週か求めるメソッド
         static int NthWeek(DateTime date) {
@@ -68,7 +66,7 @@ namespace Section01 {
             return (date.Day + firstDayOfWeek - 1) / 7 + 1;
         }
 
-        //次の誕生日までの日数を求めて表示する
+        
          
       
 
