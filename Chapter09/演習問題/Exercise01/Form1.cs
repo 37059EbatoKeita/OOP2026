@@ -25,7 +25,7 @@ namespace Exercise01 {
 
             var year = int.Parse(deatTime.ToString("yy", culture));
             var str2 = string.Format($"{culture}{year,2}”N{deatTime.Month,2}ŒŽ{deatTime.Day,2}“ú(dayOfWeek)");
-            Console.WriteLine(str2);
+            tbOut3.Text = str2;
 
         }
     }
