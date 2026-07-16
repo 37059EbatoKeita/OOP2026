@@ -223,6 +223,8 @@
             // 
             // dgbRecords
             // 
+            dgbRecords.AllowUserToAddRows = false;
+            dgbRecords.AllowUserToDeleteRows = false;
             dgbRecords.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgbRecords.Location = new Point(112, 392);
             dgbRecords.Name = "dgbRecords";
@@ -319,6 +321,7 @@
             btOpenPicture.TabIndex = 6;
             btOpenPicture.Text = "開く";
             btOpenPicture.UseVisualStyleBackColor = true;
+            btOpenPicture.Click += btOpenPicture_Click;
             // 
             // pbPicture
             // 
@@ -456,6 +459,7 @@
             MainMenuStrip = menuStrip1;
             Name = "Form1";
             Text = "試乗レポート管理システム";
+            Load += Form1_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgbRecords).EndInit();
