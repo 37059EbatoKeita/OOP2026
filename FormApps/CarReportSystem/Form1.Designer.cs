@@ -60,13 +60,13 @@
             ヘルプHToolStripMenuItem = new ToolStripMenuItem();
             このアプリについてToolStripMenuItem = new ToolStripMenuItem();
             ofdPicFileOpen = new OpenFileDialog();
-            tsslb = new ToolStripStatusLabel();
-            tsslbMessage = new StatusStrip();
+            statusStrip1 = new StatusStrip();
+            tsslbMessage = new ToolStripStatusLabel();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgbRecords).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbPicture).BeginInit();
             menuStrip1.SuspendLayout();
-            tsslbMessage.SuspendLayout();
+            statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // label1
@@ -227,7 +227,9 @@
             dgbRecords.AllowUserToDeleteRows = false;
             dgbRecords.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgbRecords.Location = new Point(112, 392);
+            dgbRecords.MultiSelect = false;
             dgbRecords.Name = "dgbRecords";
+            dgbRecords.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgbRecords.Size = new Size(743, 252);
             dgbRecords.TabIndex = 4;
             dgbRecords.Click += dgbRecords_Click;
@@ -290,6 +292,7 @@
             btDeletePicture.TabIndex = 6;
             btDeletePicture.Text = "削除";
             btDeletePicture.UseVisualStyleBackColor = true;
+            btDeletePicture.Click += btDeletePicture_Click;
             // 
             // btModhuiRecord
             // 
@@ -301,6 +304,7 @@
             btModhuiRecord.TabIndex = 6;
             btModhuiRecord.Text = "修正";
             btModhuiRecord.UseVisualStyleBackColor = false;
+            btModhuiRecord.Click += btModhuiRecord_Click;
             // 
             // btDeleteRecord
             // 
@@ -312,6 +316,7 @@
             btDeleteRecord.TabIndex = 6;
             btDeleteRecord.Text = "削除";
             btDeleteRecord.UseVisualStyleBackColor = false;
+            btDeleteRecord.Click += btDeleteRecord_Click;
             // 
             // btOpenPicture
             // 
@@ -414,27 +419,26 @@
             // 
             ofdPicFileOpen.FileName = "openFileDialog1";
             // 
-            // tsslb
+            // statusStrip1
             // 
-            tsslb.Name = "tsslb";
-            tsslb.Size = new Size(0, 17);
+            statusStrip1.Items.AddRange(new ToolStripItem[] { tsslbMessage });
+            statusStrip1.Location = new Point(0, 669);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new Size(954, 22);
+            statusStrip1.TabIndex = 9;
+            statusStrip1.Text = "statusStrip1";
             // 
             // tsslbMessage
             // 
-            tsslbMessage.Font = new Font("Yu Gothic UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
-            tsslbMessage.Items.AddRange(new ToolStripItem[] { tsslb });
-            tsslbMessage.Location = new Point(0, 669);
             tsslbMessage.Name = "tsslbMessage";
-            tsslbMessage.Size = new Size(954, 22);
-            tsslbMessage.TabIndex = 9;
-            tsslbMessage.Text = "StatusStrip";
+            tsslbMessage.Size = new Size(0, 17);
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(954, 691);
-            Controls.Add(tsslbMessage);
+            Controls.Add(statusStrip1);
             Controls.Add(pbPicture);
             Controls.Add(btDeletePicture);
             Controls.Add(btNewimpt);
@@ -456,18 +460,19 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(menuStrip1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             MainMenuStrip = menuStrip1;
+            MaximizeBox = false;
             Name = "Form1";
             Text = "試乗レポート管理システム";
-            Load += Form1_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgbRecords).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbPicture).EndInit();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
-            tsslbMessage.ResumeLayout(false);
-            tsslbMessage.PerformLayout();
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -511,7 +516,7 @@
         private ToolStripMenuItem ヘルプHToolStripMenuItem;
         private ToolStripMenuItem このアプリについてToolStripMenuItem;
         private OpenFileDialog ofdPicFileOpen;
-        private ToolStripStatusLabel tsslb;
-        private StatusStrip tsslbMessage;
+        private StatusStrip statusStrip1;
+        private ToolStripStatusLabel tsslbMessage;
     }
 }

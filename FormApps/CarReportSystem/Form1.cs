@@ -27,14 +27,14 @@ namespace CarReportSystem {
                 Author = cbAurther.Text,
                 Maker = GetRadopButtonMaker(),
                 CarName = cbCarName.Text,
-                Rrport = tbReport.Text,
+                Report = tbReport.Text,
                 Picture = pbPicture.Image,
             };
             listCarReports.Add(carReport);
 
+            //入力履歴を登録
             SetCbAuthor(cbAurther.Text);
-
-            ImputItemsAllClear(); //入力項目の全クリア
+            SetCbCarName(cbCarName.Text);
 
         }
         private MakerGroup GetRadopButtonMaker() {
@@ -72,12 +72,13 @@ namespace CarReportSystem {
 
         private void dgbRecords_Click(object sender, EventArgs e) {
 
-            if (dgbRecords.CurrentRow is null) return;
+            if ((dgbRecords.CurrentRow is null)
+                || (!dgbRecords.CurrentRow.Selected))return;
 
             dtpDate.Value = (DateTime)dgbRecords.CurrentRow.Cells["Date"].Value;
             cbAurther.Text = (string)dgbRecords.CurrentRow.Cells["Author"].Value;
-            SetRadioButtonMaker((MakerGroup)dgbRecords.CurrentRow.Cells["Meker"].Value);
-            cbCarName.Text = (string)dgbRecords.CurrentRow.Cells["Name"].Value;
+            SetRadioButtonMaker((MakerGroup)dgbRecords.CurrentRow.Cells["Maker"].Value);
+            cbCarName.Text = (string)dgbRecords.CurrentRow.Cells["CarName"].Value;
             tbReport.Text = (string)dgbRecords.CurrentRow.Cells["Report"].Value;
             pbPicture.Image = (Image)dgbRecords.CurrentRow.Cells["Picture"].Value;
         }
@@ -112,21 +113,42 @@ namespace CarReportSystem {
             if (!cbAurther.Items.Contains(author)) {
                 cbAurther.Items.Add(author);
             }
-
         }
         //車名の入力履歴をコンボボックスへ登録（重複なし）
         private void SetCbCarName(string carName) {
 
             if (!cbCarName.Items.Contains(carName)) {
-                cbCarName.Items.Add(cbCarName);
+                cbCarName.Items.Add(carName);
             }
+        }
+
+        private void btDeletePicture_Click(object sender, EventArgs e) {
+            pbPicture.Image = null;
+        }
+
+        private void btDeleteRecord_Click(object sender, EventArgs e) {
+
+            if ((dgbRecords.CurrentRow is null)
+                || (!dgbRecords.CurrentRow.Selected))return;
+
+            //削除したいインデックスを指定してリストから削除
+            listCarReports.RemoveAt(dgbRecords.CurrentRow.Index);
+
+            ImputItemsAllClear(); //データグリッドビューを更新したら呼ぶメソッド
+
+        }
+
+        private void btModhuiRecord_Click(object sender, EventArgs e) {
+            //カーレポート管理用リストの該当する要素のデータを書き換える
+            listCarReports[dgbRecords.CurrentRow.Index].Date = dtpDate.Value;
+            listCarReports[dgbRecords.CurrentRow.Index].Author = cbAurther.Text;
+            listCarReports[dgbRecords.CurrentRow.Index].Maker = GetRadopButtonMaker();
+            listCarReports[dgbRecords.CurrentRow.Index].CarName = cbCarName.Text;
+            listCarReports[dgbRecords.CurrentRow.Index].Report = tbReport.Text;
+            listCarReports[dgbRecords.CurrentRow.Index].Picture = pbPicture.Image;
 
 
-            }
-
-        private void Form1_Load(object sender, EventArgs e) {
-
+            dgbRecords.Refresh();  //データグリッドビューの更新
         }
     }
 }
-
