@@ -1,4 +1,6 @@
 using System.ComponentModel;
+using System.Xml;
+using System.Xml.Serialization;
 using static CarReportSystem.CarReport;
 
 namespace CarReportSystem {
@@ -6,6 +8,9 @@ namespace CarReportSystem {
 
         //カーレポート管理用リスト
         BindingList<CarReport> listCarReports = new BindingList<CarReport>();
+
+        //設定クラスのオブジェクトを生成
+        Settings settings = new Settings();
 
         public Form1() {
             InitializeComponent();
@@ -37,9 +42,9 @@ namespace CarReportSystem {
             SetCbCarName(cbCarName.Text.Trim());
 
             dgbRecords.ClearSelection(); //セルの選択を解除する
-            
-            
-            
+
+
+
         }
         private MakerGroup GetRadopButtonMaker() {
             if (rbToyota.Checked)
@@ -76,7 +81,7 @@ namespace CarReportSystem {
             dgbRecords.ClearSelection(); //セルの選択を解除する
         }
 
-       
+
         private void SetRadioButtonMaker(MakerGroup targetMaker) {
             switch (targetMaker) {
 
@@ -129,12 +134,12 @@ namespace CarReportSystem {
             //削除したいインデックスを指定してリストから削除
             listCarReports.RemoveAt(dgbRecords.CurrentRow.Index);
 
-            
+
 
         }
-            //データグリッドビューを更新したら呼ぶメソッド
-          
         
+
+
 
 
         private void btModhuiRecord_Click(object sender, EventArgs e) {
@@ -149,22 +154,22 @@ namespace CarReportSystem {
             }
 
 
-                //カーレポート管理用リストの該当する要素のデータを書き換える
-                listCarReports[dgbRecords.CurrentRow.Index].Date = dtpDate.Value.Date;
-                listCarReports[dgbRecords.CurrentRow.Index].Author = cbAurther.Text.Trim();
-                listCarReports[dgbRecords.CurrentRow.Index].Maker = GetRadopButtonMaker();
-                listCarReports[dgbRecords.CurrentRow.Index].CarName = cbCarName.Text.Trim();
-                listCarReports[dgbRecords.CurrentRow.Index].Report = tbReport.Text;
-                listCarReports[dgbRecords.CurrentRow.Index].Picture = pbPicture.Image;
+            //カーレポート管理用リストの該当する要素のデータを書き換える
+            listCarReports[dgbRecords.CurrentRow.Index].Date = dtpDate.Value.Date;
+            listCarReports[dgbRecords.CurrentRow.Index].Author = cbAurther.Text.Trim();
+            listCarReports[dgbRecords.CurrentRow.Index].Maker = GetRadopButtonMaker();
+            listCarReports[dgbRecords.CurrentRow.Index].CarName = cbCarName.Text.Trim();
+            listCarReports[dgbRecords.CurrentRow.Index].Report = tbReport.Text;
+            listCarReports[dgbRecords.CurrentRow.Index].Picture = pbPicture.Image;
 
-                SetCbAuthor(cbAurther.Text.Trim());
-                SetCbCarName(cbCarName.Text.Trim());
+            SetCbAuthor(cbAurther.Text.Trim());
+            SetCbCarName(cbCarName.Text.Trim());
 
-                dgbRecords.Refresh();  //データグリッドビューの更新
-               
-                tsslbMessage.Text = "レポートを修正しました。";
-            }
-        
+            dgbRecords.Refresh();  //データグリッドビューの更新
+
+            tsslbMessage.Text = "レポートを修正しました。";
+        }
+
 
         private void dgbRecords_SelectionChanged(object sender, EventArgs e) {
 
@@ -185,12 +190,22 @@ namespace CarReportSystem {
             Application.Exit();
         }
 
-      
+
         private void 色設定ToolStripMenuItem_Click(object sender, EventArgs e) {
-            if(cdColor.ShowDialog() == DialogResult.OK){
+            if (cdColor.ShowDialog() == DialogResult.OK) {
                 BackColor = cdColor.Color;
 
-                }
+            }
+        }
+
+        //フォームが閉じたら呼ばれるイベントハンドラ
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
+            //設定ファイルへ色情報を保存する処理（シリアル化）
+            //P284以降を参考にする（ファイル名：setting.xml）
+            using (var writer = XmlWriter.Create("setting.xml")) {
+                var serializer = new XmlSerializer(settings.GetType());
+                serializer.Serialize(writer, settings);
             }
         }
     }
+}
