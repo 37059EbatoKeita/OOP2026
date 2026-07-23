@@ -38,6 +38,8 @@ namespace CarReportSystem {
 
             dgbRecords.CurrentRow.Selected = false; //セルの選択を解除する
 
+
+
         }
         private MakerGroup GetRadopButtonMaker() {
             if (rbToyota.Checked)
@@ -167,5 +169,17 @@ namespace CarReportSystem {
             tbReport.Text = (string)dgbRecords.CurrentRow.Cells["Report"].Value;
             pbPicture.Image = (Image)dgbRecords.CurrentRow.Cells["Picture"].Value;
         }
+
+        private void 終了ToolStripMenuItem_Click(object sender, EventArgs e) {
+            Application.Exit();
+        }
+
+      
+        private void 色設定ToolStripMenuItem_Click(object sender, EventArgs e) {
+            if(cdColor.ShowDialog() == DialogResult.OK){
+                BackColor = cdColor.Color;
+
+                }
+            }
+        }
     }
-}
