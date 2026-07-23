@@ -36,6 +36,8 @@ namespace CarReportSystem {
             SetCbAuthor(cbAurther.Text);
             SetCbCarName(cbCarName.Text);
 
+            dgbRecords.CurrentRow.Selected = false; //セルの選択を解除する
+
         }
         private MakerGroup GetRadopButtonMaker() {
             if (rbToyota.Checked)
@@ -68,12 +70,14 @@ namespace CarReportSystem {
             cbCarName.Text = string.Empty;
             tbReport.Text = string.Empty;
             pbPicture.Image = null;
+
+            dgbRecords.CurrentRow.Selected = false; //セルの選択を解除する
         }
 
         private void dgbRecords_Click(object sender, EventArgs e) {
 
             if ((dgbRecords.CurrentRow is null)
-                || (!dgbRecords.CurrentRow.Selected))return;
+              || (!dgbRecords.CurrentRow.Selected)) return;
 
             dtpDate.Value = (DateTime)dgbRecords.CurrentRow.Cells["Date"].Value;
             cbAurther.Text = (string)dgbRecords.CurrentRow.Cells["Author"].Value;
@@ -81,6 +85,7 @@ namespace CarReportSystem {
             cbCarName.Text = (string)dgbRecords.CurrentRow.Cells["CarName"].Value;
             tbReport.Text = (string)dgbRecords.CurrentRow.Cells["Report"].Value;
             pbPicture.Image = (Image)dgbRecords.CurrentRow.Cells["Picture"].Value;
+
         }
         private void SetRadioButtonMaker(MakerGroup targetMaker) {
             switch (targetMaker) {
@@ -129,7 +134,7 @@ namespace CarReportSystem {
         private void btDeleteRecord_Click(object sender, EventArgs e) {
 
             if ((dgbRecords.CurrentRow is null)
-                || (!dgbRecords.CurrentRow.Selected))return;
+                || (!dgbRecords.CurrentRow.Selected)) return;
 
             //削除したいインデックスを指定してリストから削除
             listCarReports.RemoveAt(dgbRecords.CurrentRow.Index);
@@ -147,8 +152,20 @@ namespace CarReportSystem {
             listCarReports[dgbRecords.CurrentRow.Index].Report = tbReport.Text;
             listCarReports[dgbRecords.CurrentRow.Index].Picture = pbPicture.Image;
 
-
             dgbRecords.Refresh();  //データグリッドビューの更新
+        }
+
+        private void dgbRecords_SelectionChanged(object sender, EventArgs e) {
+
+            if ((dgbRecords.CurrentRow is null)
+               || (!dgbRecords.CurrentRow.Selected)) return;
+
+            dtpDate.Value = (DateTime)dgbRecords.CurrentRow.Cells["Date"].Value;
+            cbAurther.Text = (string)dgbRecords.CurrentRow.Cells["Author"].Value;
+            SetRadioButtonMaker((MakerGroup)dgbRecords.CurrentRow.Cells["Maker"].Value);
+            cbCarName.Text = (string)dgbRecords.CurrentRow.Cells["CarName"].Value;
+            tbReport.Text = (string)dgbRecords.CurrentRow.Cells["Report"].Value;
+            pbPicture.Image = (Image)dgbRecords.CurrentRow.Cells["Picture"].Value;
         }
     }
 }
