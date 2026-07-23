@@ -234,7 +234,6 @@
             dgbRecords.Size = new Size(743, 252);
             dgbRecords.TabIndex = 4;
             dgbRecords.SelectionChanged += dgbRecords_SelectionChanged;
-            dgbRecords.Click += dgbRecords_Click;
             // 
             // tbReport
             // 
@@ -368,7 +367,6 @@
             ファイルFToolStripMenuItem.Name = "ファイルFToolStripMenuItem";
             ファイルFToolStripMenuItem.Size = new Size(67, 20);
             ファイルFToolStripMenuItem.Text = "ファイル(&F)";
-            
             // 
             // 開くToolStripMenuItem
             // 
