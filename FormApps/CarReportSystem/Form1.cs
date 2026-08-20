@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Linq.Expressions;
 using System.Xml;
 using System.Xml.Serialization;
 using static CarReportSystem.CarReport;
@@ -16,6 +17,31 @@ namespace CarReportSystem {
             InitializeComponent();
             dgbRecords.DataSource = listCarReports;
         }
+
+        private void Form1_Load(object sender,EventArgs e) {
+            //設定ファイルを読み込み背景色を設定する　（逆シリアル化）
+
+            //ファイルが存在するか？
+            if (File.Exists("setting.xml")) {
+                try {
+                    //P286以降を参考にする　（ファイル名：setting.xml)
+                    using(var reader = XmlReader.Create("setting.xml")) {
+                        var serialzer = new XmlSerializer(typeof(Settings));
+                        var settings = serialzer.Deserialize(reader) as Settings;
+
+                        //背景色設定
+                        BackColor = Color.FromArgb(settings.MainFormBackColor);
+                    }
+                }
+                catch (Exception ex) {
+                    tsslbMessage.Text = "設定ファイル読み込みエラー";
+                    MessageBox.Show(ex.Message);
+                }
+            } else {
+                tsslbMessage.Text = "設定ファイルがありません";
+            }
+        }
+        
         //追加ボタンイベントハンドラ
         private void btAdReport_Click(object sender, EventArgs e) {
 
@@ -194,6 +220,8 @@ namespace CarReportSystem {
         private void 色設定ToolStripMenuItem_Click(object sender, EventArgs e) {
             if (cdColor.ShowDialog() == DialogResult.OK) {
                 BackColor = cdColor.Color;
+                //変更された色の情報を保存
+                settings.MainFormBackColor = cdColor.Color.ToArgb();
 
             }
         }
@@ -202,6 +230,7 @@ namespace CarReportSystem {
         private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
             //設定ファイルへ色情報を保存する処理（シリアル化）
             //P284以降を参考にする（ファイル名：setting.xml）
+
             using (var writer = XmlWriter.Create("setting.xml")) {
                 var serializer = new XmlSerializer(settings.GetType());
                 serializer.Serialize(writer, settings);
