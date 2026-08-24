@@ -63,6 +63,8 @@
             statusStrip1 = new StatusStrip();
             tsslbMessage = new ToolStripStatusLabel();
             cdColor = new ColorDialog();
+            sfFileDialog = new SaveFileDialog();
+            ofdFileDialog = new OpenFileDialog();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgbRecords).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbPicture).BeginInit();
@@ -379,6 +381,7 @@
             保存ToolStripMenuItem.Name = "保存ToolStripMenuItem";
             保存ToolStripMenuItem.Size = new Size(180, 22);
             保存ToolStripMenuItem.Text = "保存...";
+            保存ToolStripMenuItem.Click += 保存ToolStripMenuItem_Click;
             // 
             // toolStripSeparator1
             // 
@@ -436,6 +439,10 @@
             tsslbMessage.Name = "tsslbMessage";
             tsslbMessage.Size = new Size(0, 17);
             // 
+            // ofdFileDialog
+            // 
+            ofdFileDialog.FileName = "openFileDialog1";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -468,6 +475,7 @@
             MaximizeBox = false;
             Name = "Form1";
             Text = "試乗レポート管理システム";
+            Load += Form1_Load;
             FormClosed += Form1_FormClosed;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
@@ -523,5 +531,7 @@
         private StatusStrip statusStrip1;
         private ToolStripStatusLabel tsslbMessage;
         private ColorDialog cdColor;
+        private SaveFileDialog sfFileDialog;
+        private OpenFileDialog ofdFileDialog;
     }
 }
