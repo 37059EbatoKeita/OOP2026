@@ -167,10 +167,8 @@ namespace CarReportSystem {
                     tsslbMessage.Text = "削除するレポートを選択してください"; 
                     return;
                 }
+
             listCarReports.Remove(carReport);
-
-            
-
         }
         private void btModhuiRecord_Click(object sender, EventArgs e) {
             if (dgbRecords.SelectedRows.Count == 0) {
@@ -202,8 +200,6 @@ namespace CarReportSystem {
 
             tsslbMessage.Text = "レポートを修正しました。";
         }
-
-
         private void dgbRecords_SelectionChanged(object sender, EventArgs e) {
 
             if ((dgbRecords.CurrentRow?.DataBoundItem is not CarReport carReport)
@@ -215,15 +211,11 @@ namespace CarReportSystem {
             cbCarName.Text = carReport.CarName;
             tbReport.Text = carReport.Report;
             pbPicture.Image = carReport.Picture;
-
-
         }
 
         private void 終了ToolStripMenuItem_Click(object sender, EventArgs e) {
             Application.Exit();
         }
-
-
         private void 色設定ToolStripMenuItem_Click(object sender, EventArgs e) {
             if (cdColor.ShowDialog() == DialogResult.OK) {
                 BackColor = cdColor.Color;
