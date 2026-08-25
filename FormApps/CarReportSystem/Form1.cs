@@ -12,6 +12,7 @@ namespace CarReportSystem {
 
         //設定クラスのオブジェクトを生成
         Settings settings = new Settings();
+        private CarReport carReport;
 
         public Form1() {
             InitializeComponent();
@@ -162,7 +163,14 @@ namespace CarReportSystem {
                
 
             //削除したいインデックスを指定してリストから削除
-            listCarReports.RemoveAt(dgbRecords.CurrentRow.Index);
+            if( dgbRecords.CurrentRow?.DataBoundItem is not CarReport carReport) {
+                    tsslbMessage.Text = "削除するレポートを選択してください"; 
+                    return;
+                }
+            listCarReports.Remove(carReport);
+
+            
+
         }
         private void btModhuiRecord_Click(object sender, EventArgs e) {
             if (dgbRecords.SelectedRows.Count == 0) {
@@ -175,7 +183,10 @@ namespace CarReportSystem {
                 return;
             }
 
-
+            if (dgbRecords.CurrentRow?.DataBoundItem is not CarReport carReport) {
+                tsslbMessage.Text = "修正するレポートを選択してください";
+                return;
+            }
             //カーレポート管理用リストの該当する要素のデータを書き換える
             listCarReports[dgbRecords.CurrentRow.Index].Date = dtpDate.Value.Date;
             listCarReports[dgbRecords.CurrentRow.Index].Author = cbAurther.Text.Trim();
