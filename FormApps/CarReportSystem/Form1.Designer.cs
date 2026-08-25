@@ -375,6 +375,7 @@
             開くToolStripMenuItem.Name = "開くToolStripMenuItem";
             開くToolStripMenuItem.Size = new Size(180, 22);
             開くToolStripMenuItem.Text = "開く...";
+            開くToolStripMenuItem.Click += 開くToolStripMenuItem_Click;
             // 
             // 保存ToolStripMenuItem
             // 
@@ -475,8 +476,8 @@
             MaximizeBox = false;
             Name = "Form1";
             Text = "試乗レポート管理システム";
-            Load += Form1_Load;
             FormClosed += Form1_FormClosed;
+            Load += Form1_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgbRecords).EndInit();
