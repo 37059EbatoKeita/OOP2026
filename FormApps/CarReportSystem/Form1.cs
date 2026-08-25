@@ -9,10 +9,12 @@ namespace CarReportSystem {
 
         //カーレポート管理用リスト
         BindingList<CarReport> listCarReports = new BindingList<CarReport>();
+        private CarReport carReport;
+
 
         //設定クラスのオブジェクトを生成
-        Settings settings = new Settings();
-        private CarReport carReport;
+        //Settings settings = Settings.Instance;
+        
 
         public Form1() {
             InitializeComponent();
@@ -34,7 +36,7 @@ namespace CarReportSystem {
                         if (serialzer.Deserialize(reader) is Settings loadedSettings) {
                             settings = loadedSettings;
                             //背景色設定
-                            BackColor = Color.FromArgb(settings.MainFormBackColor);
+                            BackColor = Color.FromArgb(Settings.Instance.MainFormBackColor);
                         }
                     }
                 }
@@ -167,8 +169,9 @@ namespace CarReportSystem {
                     tsslbMessage.Text = "削除するレポートを選択してください"; 
                     return;
                 }
-
             listCarReports.Remove(carReport);
+
+           
         }
         private void btModhuiRecord_Click(object sender, EventArgs e) {
             if (dgbRecords.SelectedRows.Count == 0) {
@@ -200,6 +203,8 @@ namespace CarReportSystem {
 
             tsslbMessage.Text = "レポートを修正しました。";
         }
+
+
         private void dgbRecords_SelectionChanged(object sender, EventArgs e) {
 
             if ((dgbRecords.CurrentRow?.DataBoundItem is not CarReport carReport)
@@ -211,16 +216,20 @@ namespace CarReportSystem {
             cbCarName.Text = carReport.CarName;
             tbReport.Text = carReport.Report;
             pbPicture.Image = carReport.Picture;
+
+
         }
 
         private void 終了ToolStripMenuItem_Click(object sender, EventArgs e) {
             Application.Exit();
         }
+
+
         private void 色設定ToolStripMenuItem_Click(object sender, EventArgs e) {
             if (cdColor.ShowDialog() == DialogResult.OK) {
                 BackColor = cdColor.Color;
                 //変更された色の情報を保存
-                settings.MainFormBackColor = cdColor.Color.ToArgb();
+                Settings.Instance.MainFormBackColor = cdColor.Color.ToArgb();
 
             }
         }
@@ -231,8 +240,8 @@ namespace CarReportSystem {
             //P284以降を参考にする（ファイル名：setting.xml）
 
             using (var writer = XmlWriter.Create("setting.xml")) {
-                var serializer = new XmlSerializer(settings.GetType());
-                serializer.Serialize(writer, settings);
+                var serializer = new XmlSerializer(Settings.Instance.GetType());
+                serializer.Serialize(writer, Settings.Instance);
             }
         }
 
