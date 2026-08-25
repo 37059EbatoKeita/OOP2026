@@ -28,10 +28,13 @@ namespace CarReportSystem {
                     //P286以降を参考にする　（ファイル名：setting.xml)
                     using (var reader = XmlReader.Create("setting.xml")) {
                         var serialzer = new XmlSerializer(typeof(Settings));
-                        settings = serialzer.Deserialize(reader) as Settings;
 
-                        //背景色設定
-                        BackColor = Color.FromArgb(settings.MainFormBackColor);
+                        //settings = serialzer.Deserialize(reader) as Settings;
+                        if (serialzer.Deserialize(reader) is Settings loadedSettings) {
+                            settings = loadedSettings;
+                            //背景色設定
+                            BackColor = Color.FromArgb(settings.MainFormBackColor);
+                        }
                     }
                 }
                 catch (Exception ex) {
@@ -143,7 +146,6 @@ namespace CarReportSystem {
         }
         //車名の入力履歴をコンボボックスへ登録（重複なし）
         private void SetCbCarName(string carName) {
-
             if (!cbCarName.Items.Contains(carName)) {
                 cbCarName.Items.Add(carName);
             }
@@ -155,20 +157,13 @@ namespace CarReportSystem {
 
         private void btDeleteRecord_Click(object sender, EventArgs e) {
 
-            if ((dgbRecords.CurrentRow is null)
-                || (!dgbRecords.CurrentRow.Selected)) return;
+            if ((dgbRecords.CurrentRow is null
+                || !dgbRecords.CurrentRow.Selected)) 
+               
 
             //削除したいインデックスを指定してリストから削除
             listCarReports.RemoveAt(dgbRecords.CurrentRow.Index);
-
-
-
         }
-
-
-
-
-
         private void btModhuiRecord_Click(object sender, EventArgs e) {
             if (dgbRecords.SelectedRows.Count == 0) {
                 tsslbMessage.Text = "修正するレポートを選択してください";
