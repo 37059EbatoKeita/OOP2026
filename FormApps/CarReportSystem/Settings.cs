@@ -3,7 +3,7 @@ using System.Xml;
 using System.Xml.Serialization;
 
 namespace CarReportSystem {
-    public class Settings {
+    public sealed class Settings {
 
         private const string FileName = "setting.xml";
 
@@ -15,14 +15,16 @@ namespace CarReportSystem {
            = SystemColors.Control.ToArgb();
 
         //唯一のオブジェクトを取得する
-        public static Settings Instance; 
+        public static Settings Instance {
+            get { return _instance; }
+        } 
          
             
         //外部からnewできないようにする
         private Settings() { }
 
-
-        public void load() {
+        //設定ファイルからロード
+        public void Load() {
             if (!File.Exists(FileName))
                 return;
 
@@ -34,7 +36,7 @@ namespace CarReportSystem {
             }
         }
 
-
+        //設定ファイルを保存
         public void Save() {
             var data = new SettingsData {
                 MainFormBackColor = MainFormBackColor
