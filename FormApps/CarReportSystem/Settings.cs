@@ -51,5 +51,6 @@ namespace CarReportSystem {
     //XML保存用のクラス
     public class SettingsData {
         public int MainFormBackColor { get; set; }
+
     }
 }
