@@ -74,6 +74,7 @@ public partial class Form1 : Form
 
     private void btDelete_Click(object sender, EventArgs e)
     {
+
         if(dgvProducts.CurrentRow?.DataBoundItem is not Product selectedProduct) 
         {
             tsslMessage.Text = "削除する商品を選択してください。";
