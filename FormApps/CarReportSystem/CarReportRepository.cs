@@ -1,6 +1,7 @@
 using CarReportSystem;
 using Microsoft.Data.Sqlite;
 using System.Diagnostics;
+using System.Drawing.Imaging;
 using System.Globalization;
 using System.Xml.Linq;
 
@@ -43,7 +44,8 @@ public class CarReportRepository
                 Maker = (CarReport.MakerGroup)reader.GetInt32(3),
                 CarName = reader.GetString(4),
                 Report = reader.GetString(5),
-                //Picture = 
+                Picture = reader.IsDBNull(6) 
+                            ? null : BytesToImage(reader.GetFieldValue<byte[]>(6))
             });
         }
         return reports;
@@ -51,7 +53,7 @@ public class CarReportRepository
 
     //商品を1件追加する。Create（INSERT)に相当する
     //戻り値として自動採番されたIdを返す
-    public int Add(string name , int price) {
+    public int Add(int id , int date, string author, string maker, string carname, string report) {
         //接続オブジェクトを生成する。
         using var connection = Database.GetConnection();
 
@@ -73,8 +75,14 @@ public class CarReportRepository
             SELECT last_insert_rowid();
             """;
 
-        command.Parameters.AddWithValue("$name", name);
-        command.Parameters.AddWithValue("$price", price);
+        command.Parameters.AddWithValue("$id",id );
+        command.Parameters.AddWithValue("$date", date);
+        command.Parameters.AddWithValue("author", author);
+        command.Parameters.AddWithValue("maker", maker);
+        command.Parameters.AddWithValue("carname", carname);
+        command.Parameters.AddWithValue("report", report);
+
+
 
         //一つの値を返すSQLを実行する
         var result = command.ExecuteScalar();
@@ -103,6 +111,10 @@ public class CarReportRepository
 
       
         command.Parameters.AddWithValue("$id", product.Id);
+        command.Parameters.AddWithValue("$data", product.Date);
+        command.Parameters.AddWithValue("$author", product.Author);
+        command.Parameters.AddWithValue("$maker", product.Maker);
+
 
         //更新件数が0なら対象が存在しない
         if (command.ExecuteNonQuery() == 0)
@@ -121,5 +133,22 @@ public class CarReportRepository
 
         command.Parameters.AddWithValue("$id", id);
         command.ExecuteNonQuery();
+    }
+    // ImageをSQLiteへ保存できるbyte[]へ変換する
+    private static byte[]? ImageToBytes(Image? image) {
+        if (image is null) return null;
+
+        using var stream = new MemoryStream();
+        // DBへはPNG形式で保存
+        image.Save(stream, ImageFormat.Png);
+        return stream.ToArray();
+    }
+
+    // SQLiteのBLOB（byte[]）をImageへ変換する
+    private static Image BytesToImage(byte[] data) {
+        using var stream = new MemoryStream(data);
+        using var image = Image.FromStream(stream);
+        // MemoryStream破棄後も利用できるようBitmapとしてコピーする。
+        return new Bitmap(image);
     }
 }
