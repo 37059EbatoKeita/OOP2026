@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Drawing.Imaging;
 using System.Globalization;
 using System.Xml.Linq;
+using static CarReportSystem.CarReport;
 
 namespace SQLiteProductSample;
 
@@ -45,15 +46,16 @@ public class CarReportRepository
                 CarName = reader.GetString(4),
                 Report = reader.GetString(5),
                 Picture = reader.IsDBNull(6) 
-                            ? null : BytesToImage(reader.GetFieldValue<byte[]>(6))
+                            ? null : 
+                            BytesToImage(reader.GetFieldValue<byte[]>(6))
             });
         }
         return reports;
     }
 
-    //商品を1件追加する。Create（INSERT)に相当する
+    //レポートを1件追加する。Create（INSERT)に相当する
     //戻り値として自動採番されたIdを返す
-    public int Add(int id , int date, string author, string maker, string carname, string report) {
+    public int Add(DateTime date, string author, MakerGroup maker, string carName, string report, Image? picture) {
         //接続オブジェクトを生成する。
         using var connection = Database.GetConnection();
 
@@ -70,18 +72,21 @@ public class CarReportRepository
             INSERT INTO CarReports 
             (Data, Author, Maker, CarName, Report, Picture)
             VALUES 
-            ($data, $author, $carname, $report, $picture);
+            ($data, $author, $maker, $carname, $report, $picture);
 
             SELECT last_insert_rowid();
             """;
 
-        command.Parameters.AddWithValue("$id",id );
-        command.Parameters.AddWithValue("$date", date);
-        command.Parameters.AddWithValue("author", author);
-        command.Parameters.AddWithValue("maker", maker);
-        command.Parameters.AddWithValue("carname", carname);
-        command.Parameters.AddWithValue("report", report);
+        var pic = ImageToBytes(picture);
 
+        command.Parameters.AddWithValue("$date", date.ToString("yyyy-MM-dd"));
+        command.Parameters.AddWithValue("$author", author);
+        command.Parameters.AddWithValue("$maker",(int)maker);
+        command.Parameters.AddWithValue("$carName", carName);
+        command.Parameters.AddWithValue("$report", report);
+        command.Parameters.AddWithValue("$picture",pic is null ? DBNull.Value : pic);
+
+      
 
 
         //一つの値を返すSQLを実行する
@@ -95,7 +100,7 @@ public class CarReportRepository
 
     }
 
-    public void Update(CarReport product) {
+    public void Update(CarReport carReport) {
         //接続オブジェクトを生成する。
         using var connection = Database.GetConnection();        
         connection.Open();
@@ -109,17 +114,22 @@ public class CarReportRepository
             WHERE Id = $id;            
             """;
 
-      
-        command.Parameters.AddWithValue("$id", product.Id);
-        command.Parameters.AddWithValue("$data", product.Date);
-        command.Parameters.AddWithValue("$author", product.Author);
-        command.Parameters.AddWithValue("$maker", product.Maker);
+        command.Parameters.AddWithValue("$id", carReport.Id);
+        command.Parameters.AddWithValue("$data", carReport.Date);
+        command.Parameters.AddWithValue("$author", carReport.Author);
+        command.Parameters.AddWithValue("$maker", carReport.Maker);
+        command.Parameters.AddWithValue("$carName", carReport.CarName);
+        command.Parameters.AddWithValue("$report", carReport.Report);
+        command.Parameters.AddWithValue("$picture", carReport.Picture);
 
+
+        
 
         //更新件数が0なら対象が存在しない
         if (command.ExecuteNonQuery() == 0)
             throw new InvalidOperationException("修正対象の商品が見つかりませんでした。");
     }
+
     public void Delete(int id) {
         using var connection = Database.GetConnection();
         connection.Open();
