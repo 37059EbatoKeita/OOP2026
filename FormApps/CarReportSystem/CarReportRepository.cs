@@ -12,7 +12,6 @@ namespace SQLiteProductSample;
 //CRUD (Create / Read / Update / Delete)を担当する
 public class CarReportRepository
 {
-    
     public List<CarReport> GetAll() {
         var reports = new List<CarReport>();
 
@@ -55,7 +54,7 @@ public class CarReportRepository
 
     //レポートを1件追加する。Create（INSERT)に相当する
     //戻り値として自動採番されたIdを返す
-    public int Add(DateTime date, string author, MakerGroup maker, string carName, string report, Image? picture) {
+    public int Add(DateTime date, string author, CarReport.MakerGroup maker, string carName, string report, Image? picture) {
         //接続オブジェクトを生成する。
         using var connection = Database.GetConnection();
 
@@ -70,9 +69,9 @@ public class CarReportRepository
         command.CommandText =
             """
             INSERT INTO CarReports 
-            (Data, Author, Maker, CarName, Report, Picture)
+            (Date, Author, Maker, CarName, Report, Picture)
             VALUES 
-            ($data, $author, $maker, $carname, $report, $picture);
+            ($date, $author, $maker, $carName, $report, $picture);
 
             SELECT last_insert_rowid();
             """;
@@ -85,9 +84,6 @@ public class CarReportRepository
         command.Parameters.AddWithValue("$carName", carName);
         command.Parameters.AddWithValue("$report", report);
         command.Parameters.AddWithValue("$picture",pic is null ? DBNull.Value : pic);
-
-      
-
 
         //一つの値を返すSQLを実行する
         var result = command.ExecuteScalar();
@@ -121,10 +117,7 @@ public class CarReportRepository
         command.Parameters.AddWithValue("$carName", carReport.CarName);
         command.Parameters.AddWithValue("$report", carReport.Report);
         command.Parameters.AddWithValue("$picture", carReport.Picture);
-
-
         
-
         //更新件数が0なら対象が存在しない
         if (command.ExecuteNonQuery() == 0)
             throw new InvalidOperationException("修正対象の商品が見つかりませんでした。");

@@ -1,9 +1,6 @@
+
 using SQLiteProductSample;
-using System.Collections.Immutable;
 using System.ComponentModel;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Xml;
-using System.Xml.Serialization;
 using static CarReportSystem.CarReport;
 
 namespace CarReportSystem {
@@ -11,6 +8,8 @@ namespace CarReportSystem {
 
         //カーレポート管理用リスト
         private readonly BindingList<CarReport> _carReports = new();
+
+        //DB操作を担当するRepository
         private readonly CarReportRepository _repository = new();
 
         public Form1() {
@@ -18,7 +17,7 @@ namespace CarReportSystem {
             //起動直後にDBから商品一覧を読み込む
             InitializeComponent();
             dgbRecords.DataSource = _carReports;
-            ReloadCarreport();
+            //ReloadCarreport();
         }
 
         private void Form1_Load(object sender, EventArgs e) {
@@ -52,13 +51,25 @@ namespace CarReportSystem {
                 Report = tbReport.Text,
                 Picture = pbPicture.Image,
             };
+
+            carReport.Id = _repository.Add(
+                carReport.Date,
+                carReport.Author,
+                carReport.Maker,
+                carReport.CarName,
+                carReport.Report,
+                carReport.Picture);
+
             _carReports.Add(carReport);
+            
+
 
             //入力履歴を登録
-            SetCbAuthor(cbAurther.Text.Trim());
-            SetCbCarName(cbCarName.Text.Trim());
+            //SetCbAuthor(cbAurther.Text.Trim());
+            //SetCbCarName(cbCarName.Text.Trim());
 
             dgbRecords.ClearSelection(); //セルの選択を解除する
+           
         }
 
         private MakerGroup GetRadopButtonMaker() {
@@ -148,7 +159,7 @@ namespace CarReportSystem {
                 tsslbMessage.Text = "削除するレポートを選択してください";
                 return;
             }
-            _carReports.Remove();
+            _carReports.Remove(carReport);
         }
 
         private void btModhuiRecord_Click(object sender, EventArgs e) {
@@ -194,7 +205,26 @@ namespace CarReportSystem {
             cbCarName.Text = carReport.CarName;
             tbReport.Text = carReport.Report;
             pbPicture.Image = carReport.Picture;
+
+             
         }
+
+        //SQLiteから全レポートを読み直す
+        private void ReloadCarReports() {
+            _carReports.Clear();
+
+            cbAurther.Items.Clear(); //コンボボックスの履歴を消去
+            cbCarName.Items.Clear();
+
+            foreach (var carReport in _repository.GetAll()) {
+                _carReports.Add(carReport);
+                //コンボボックスに入力履歴を登録
+                SetCbAuthor(carReport.Author);
+                SetCbAuthor(carReport.CarName);
+            }
+            dgbRecords.ClearSelection();
+        }
+
 
         private void 終了ToolStripMenuItem_Click(object sender, EventArgs e) {
             Application.Exit();
@@ -210,7 +240,7 @@ namespace CarReportSystem {
 
         private void ReloadCarreport() {
             _carReports.Clear();
-            foreach (var carReport in _carReports.ToImmutableArray()) {
+            foreach (var carReport in _repository.GetAll()) {
                 _carReports.Add(carReport);
             }
         }
