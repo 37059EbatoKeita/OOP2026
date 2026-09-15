@@ -37,7 +37,7 @@
             cbAurther = new ComboBox();
             label4 = new Label();
             cbCarName = new ComboBox();
-            dgbRecords = new DataGridView();
+            dgvRecords = new DataGridView();
             tbReport = new TextBox();
             label5 = new Label();
             label6 = new Label();
@@ -66,7 +66,7 @@
             sfFileDialog = new SaveFileDialog();
             ofdFileDialog = new OpenFileDialog();
             groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgbRecords).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvRecords).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbPicture).BeginInit();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
@@ -224,18 +224,18 @@
             cbCarName.Size = new Size(204, 38);
             cbCarName.TabIndex = 3;
             // 
-            // dgbRecords
+            // dgvRecords
             // 
-            dgbRecords.AllowUserToAddRows = false;
-            dgbRecords.AllowUserToDeleteRows = false;
-            dgbRecords.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgbRecords.Location = new Point(112, 392);
-            dgbRecords.MultiSelect = false;
-            dgbRecords.Name = "dgbRecords";
-            dgbRecords.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgbRecords.Size = new Size(743, 252);
-            dgbRecords.TabIndex = 4;
-            dgbRecords.SelectionChanged += dgbRecords_SelectionChanged;
+            dgvRecords.AllowUserToAddRows = false;
+            dgvRecords.AllowUserToDeleteRows = false;
+            dgvRecords.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvRecords.Location = new Point(112, 392);
+            dgvRecords.MultiSelect = false;
+            dgvRecords.Name = "dgvRecords";
+            dgvRecords.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvRecords.Size = new Size(743, 252);
+            dgvRecords.TabIndex = 4;
+            dgvRecords.SelectionChanged += dgbRecords_SelectionChanged;
             // 
             // tbReport
             // 
@@ -373,39 +373,37 @@
             // 開くToolStripMenuItem
             // 
             開くToolStripMenuItem.Name = "開くToolStripMenuItem";
-            開くToolStripMenuItem.Size = new Size(180, 22);
+            開くToolStripMenuItem.Size = new Size(155, 22);
             開くToolStripMenuItem.Text = "開く...";
-      
             // 
             // 保存ToolStripMenuItem
             // 
             保存ToolStripMenuItem.Name = "保存ToolStripMenuItem";
-            保存ToolStripMenuItem.Size = new Size(180, 22);
+            保存ToolStripMenuItem.Size = new Size(155, 22);
             保存ToolStripMenuItem.Text = "保存...";
-           
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(177, 6);
+            toolStripSeparator1.Size = new Size(152, 6);
             // 
             // 色設定ToolStripMenuItem
             // 
             色設定ToolStripMenuItem.Name = "色設定ToolStripMenuItem";
-            色設定ToolStripMenuItem.Size = new Size(180, 22);
+            色設定ToolStripMenuItem.Size = new Size(155, 22);
             色設定ToolStripMenuItem.Text = "色設定...";
             色設定ToolStripMenuItem.Click += 色設定ToolStripMenuItem_Click;
             // 
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(177, 6);
+            toolStripSeparator2.Size = new Size(152, 6);
             // 
             // 終了ToolStripMenuItem
             // 
             終了ToolStripMenuItem.Name = "終了ToolStripMenuItem";
             終了ToolStripMenuItem.ShortcutKeys = Keys.Alt | Keys.F4;
-            終了ToolStripMenuItem.Size = new Size(180, 22);
+            終了ToolStripMenuItem.Size = new Size(155, 22);
             終了ToolStripMenuItem.Text = "終了(&X)";
             終了ToolStripMenuItem.Click += 終了ToolStripMenuItem_Click;
             // 
@@ -458,7 +456,7 @@
             Controls.Add(btModhuiRecord);
             Controls.Add(btAdReport);
             Controls.Add(tbReport);
-            Controls.Add(dgbRecords);
+            Controls.Add(dgvRecords);
             Controls.Add(cbCarName);
             Controls.Add(cbAurther);
             Controls.Add(groupBox1);
@@ -480,7 +478,7 @@
             Load += Form1_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgbRecords).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvRecords).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbPicture).EndInit();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
@@ -506,7 +504,7 @@
         private ComboBox cbAurther;
         private Label label4;
         private ComboBox cbCarName;
-        private DataGridView dgbRecords;
+        private DataGridView dgvRecords;
         private TextBox tbReport;
         private Label label5;
         private Label label6;

@@ -16,8 +16,9 @@ namespace CarReportSystem {
 
             //起動直後にDBから商品一覧を読み込む
             InitializeComponent();
-            dgbRecords.DataSource = _carReports;
-            //ReloadCarreport();
+            dgvRecords.AutoGenerateColumns = true;
+            dgvRecords.DataSource = _carReports;
+            ReloadCarReports();
         }
 
         private void Form1_Load(object sender, EventArgs e) {
@@ -61,15 +62,15 @@ namespace CarReportSystem {
                 carReport.Picture);
 
             _carReports.Add(carReport);
-            
+
 
 
             //入力履歴を登録
             //SetCbAuthor(cbAurther.Text.Trim());
             //SetCbCarName(cbCarName.Text.Trim());
 
-            dgbRecords.ClearSelection(); //セルの選択を解除する
-           
+            dgvRecords.ClearSelection(); //セルの選択を解除する
+
         }
 
         private MakerGroup GetRadopButtonMaker() {
@@ -105,7 +106,7 @@ namespace CarReportSystem {
             tbReport.Text = string.Empty;
             pbPicture.Image = null;
 
-            dgbRecords.ClearSelection(); //セルの選択を解除する
+            dgvRecords.ClearSelection(); //セルの選択を解除する
         }
 
         private void SetRadioButtonMaker(MakerGroup targetMaker) {
@@ -153,17 +154,18 @@ namespace CarReportSystem {
 
         private void btDeleteRecord_Click(object sender, EventArgs e) {
 
-            if (dgbRecords.CurrentRow is null
-                || !dgbRecords.CurrentRow.Selected
-                || dgbRecords.CurrentRow?.DataBoundItem is not CarReport carReport) {
+            if (dgvRecords.CurrentRow is null
+                || !dgvRecords.CurrentRow.Selected
+                || dgvRecords.CurrentRow?.DataBoundItem is not CarReport carReport) {
                 tsslbMessage.Text = "削除するレポートを選択してください";
                 return;
             }
+            _repository.Delete(carReport.Id);
             _carReports.Remove(carReport);
         }
 
         private void btModhuiRecord_Click(object sender, EventArgs e) {
-            if (dgbRecords.SelectedRows.Count == 0) {
+            if (dgvRecords.SelectedRows.Count == 0) {
                 tsslbMessage.Text = "修正するレポートを選択してください";
                 return;
             }
@@ -173,31 +175,31 @@ namespace CarReportSystem {
                 return;
             }
 
-            if (dgbRecords.CurrentRow?.DataBoundItem is not CarReport carReport) {
+            if (dgvRecords.CurrentRow?.DataBoundItem is not CarReport carReport) {
                 tsslbMessage.Text = "修正するレポートを選択してください";
                 return;
             }
 
             //カーレポート管理用リストの該当する要素のデータを書き換える
-            _carReports[dgbRecords.CurrentRow.Index].Date = dtpDate.Value.Date;
-            _carReports[dgbRecords.CurrentRow.Index].Author = cbAurther.Text.Trim();
-            _carReports[dgbRecords.CurrentRow.Index].Maker = GetRadopButtonMaker();
-            _carReports[dgbRecords.CurrentRow.Index].CarName = cbCarName.Text.Trim();
-            _carReports[dgbRecords.CurrentRow.Index].Report = tbReport.Text;
-            _carReports[dgbRecords.CurrentRow.Index].Picture = pbPicture.Image;
+            _carReports[dgvRecords.CurrentRow.Index].Date = dtpDate.Value.Date;
+            _carReports[dgvRecords.CurrentRow.Index].Author = cbAurther.Text.Trim();
+            _carReports[dgvRecords.CurrentRow.Index].Maker = GetRadopButtonMaker();
+            _carReports[dgvRecords.CurrentRow.Index].CarName = cbCarName.Text.Trim();
+            _carReports[dgvRecords.CurrentRow.Index].Report = tbReport.Text;
+            _carReports[dgvRecords.CurrentRow.Index].Picture = pbPicture.Image;
 
             SetCbAuthor(cbAurther.Text.Trim());
             SetCbCarName(cbCarName.Text.Trim());
 
-            dgbRecords.Refresh();  //データグリッドビューの更新
-
+            dgvRecords.Refresh();  //データグリッドビューの更新
+            _repository.Update(carReport);
             tsslbMessage.Text = "レポートを修正しました。";
         }
 
         private void dgbRecords_SelectionChanged(object sender, EventArgs e) {
 
-            if ((dgbRecords.CurrentRow?.DataBoundItem is not CarReport carReport)
-               || (!dgbRecords.CurrentRow.Selected)) return;
+            if ((dgvRecords.CurrentRow?.DataBoundItem is not CarReport carReport)
+               || (!dgvRecords.CurrentRow.Selected)) return;
 
             dtpDate.Value = carReport.Date;
             cbAurther.Text = carReport.Author;
@@ -206,7 +208,7 @@ namespace CarReportSystem {
             tbReport.Text = carReport.Report;
             pbPicture.Image = carReport.Picture;
 
-             
+
         }
 
         //SQLiteから全レポートを読み直す
@@ -222,7 +224,8 @@ namespace CarReportSystem {
                 SetCbAuthor(carReport.Author);
                 SetCbAuthor(carReport.CarName);
             }
-            dgbRecords.ClearSelection();
+            
+            dgvRecords.ClearSelection();
         }
 
 
@@ -235,13 +238,6 @@ namespace CarReportSystem {
                 BackColor = cdColor.Color;
                 //変更された色の情報を保存
                 Settings.Instance.MainFormBackColor = cdColor.Color.ToArgb();
-            }
-        }
-
-        private void ReloadCarreport() {
-            _carReports.Clear();
-            foreach (var carReport in _repository.GetAll()) {
-                _carReports.Add(carReport);
             }
         }
 

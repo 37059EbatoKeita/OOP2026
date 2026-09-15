@@ -24,7 +24,7 @@ public class CarReportRepository
         //Productsテーブルを作るSQL
         command.CommandText =
             """
-            SELECT Id, Data, Author, Maker, CarName, Report, Picture
+            SELECT Id, Date, Author, Maker, CarName, Report, Picture
             FROM CarReports
             ORDER BY Id;
             """;
@@ -51,6 +51,9 @@ public class CarReportRepository
         }
         return reports;
     }
+
+
+
 
     //レポートを1件追加する。Create（INSERT)に相当する
     //戻り値として自動採番されたIdを返す
@@ -105,18 +108,18 @@ public class CarReportRepository
         command.CommandText =
             """
             UPDATE CarReports
-            SET Data = $data, Author = $author, Maker = $maker,
+            SET Date = $date, Author = $author, Maker = $maker,
                 CarName = $carName, Report = $report, Picture = $picture
             WHERE Id = $id;            
             """;
 
         command.Parameters.AddWithValue("$id", carReport.Id);
-        command.Parameters.AddWithValue("$data", carReport.Date);
+        command.Parameters.AddWithValue("$date", carReport.Date.ToString("yyyy-MM-dd"));
         command.Parameters.AddWithValue("$author", carReport.Author);
-        command.Parameters.AddWithValue("$maker", carReport.Maker);
+        command.Parameters.AddWithValue("$maker", (int)carReport.Maker);
         command.Parameters.AddWithValue("$carName", carReport.CarName);
         command.Parameters.AddWithValue("$report", carReport.Report);
-        command.Parameters.AddWithValue("$picture", carReport.Picture);
+        command.Parameters.AddWithValue("$picture", carReport.Picture is null ? DBNull.Value : carReport);
         
         //更新件数が0なら対象が存在しない
         if (command.ExecuteNonQuery() == 0)
