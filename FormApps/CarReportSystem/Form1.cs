@@ -202,7 +202,19 @@ namespace CarReportSystem {
             pbPicture.Image = carReport.Picture;
 
 
+            cbAurther.Items.Clear(); //コンボボックスの履歴を消去
+            cbCarName.Items.Clear();
+
+            foreach (var carReport in _repository.GetAll()) {
+                _carReports.Add(carReport);
+                //コンボボックスに入力履歴を登録
+                SetCbAuthor(carReport.Author);
+                SetCbAuthor(carReport.CarName);
+            }
+
+            dgvRecords.ClearSelection();
         }
+
 
         private void 終了ToolStripMenuItem_Click(object sender, EventArgs e) {
             Application.Exit();
@@ -294,6 +306,10 @@ namespace CarReportSystem {
                     throw;
                 }
             }
+        }
+
+        private void 開くToolStripMenuItem_Click(object sender, EventArgs e) {
+
         }
     }
 }
