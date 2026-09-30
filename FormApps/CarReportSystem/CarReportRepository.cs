@@ -113,13 +113,15 @@ public class CarReportRepository
             WHERE Id = $id;            
             """;
 
+        var pic = ImageToBytes(carReport.Picture);
+
         command.Parameters.AddWithValue("$id", carReport.Id);
         command.Parameters.AddWithValue("$date", carReport.Date.ToString("yyyy-MM-dd"));
         command.Parameters.AddWithValue("$author", carReport.Author);
         command.Parameters.AddWithValue("$maker", (int)carReport.Maker);
         command.Parameters.AddWithValue("$carName", carReport.CarName);
         command.Parameters.AddWithValue("$report", carReport.Report);
-        command.Parameters.AddWithValue("$picture", carReport.Picture is null ? DBNull.Value : carReport);
+        command.Parameters.AddWithValue("$picture",  pic is null ? DBNull.Value : pic);
         
         //çXêVåèêîÇ™0Ç»ÇÁëŒè€Ç™ë∂ç›ÇµÇ»Ç¢
         if (command.ExecuteNonQuery() == 0)
