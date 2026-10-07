@@ -2,6 +2,7 @@
 using MvcBasicSample.Models;
 
 namespace MvcBasicSample.Data;
+
 public class AppDbContext : DbContext{
 
     //Program.csで登録した接続設定を受け取る
@@ -10,6 +11,6 @@ public class AppDbContext : DbContext{
     }
 
     //ProductsテーブルをProduct型として問い合わせるためのプロパティ
-    public DbSet<Product> products => Set<Product>();
+    public DbSet<Product> Products => Set<Product>();
 }
 
