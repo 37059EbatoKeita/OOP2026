@@ -16,10 +16,9 @@ public class ProductsController : Controller{
     // /Products/Indexで商品一覧を取得する (非同期メソッド)
     public async Task<IActionResult> Index() {
 
-        //Idの昇順で取得し結果をList<Product>にする
+        // Idの昇順で取得し結果をList<Product>にする 
         var products = await _db.Products
-            .Where(product => product.Price>500)
-            .OrderBy(product => product.Price)
+            .OrderBy(product => product.Id)
             .ToListAsync();
         //商品一覧をViewへ渡す
         return View(products);
