@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SelfOrderSystem.Models;
 
-namespace SelfOrderSystem.Data {
+namespace SelfOrderSystem.Data;
     public class AppDbContext : DbContext{
 
         //Program.csで登録した接続設定を受け取る
@@ -15,4 +15,4 @@ namespace SelfOrderSystem.Data {
         //Products テーブルを Product 型として問い合わせるためのプロパティ
         public DbSet<Product> Products => Set<Product>(); 
     }
-}
+
