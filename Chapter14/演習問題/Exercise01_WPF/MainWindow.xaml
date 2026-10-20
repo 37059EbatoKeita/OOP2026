@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="500" Width="800">
     
+    
+    
+    
     <StackPanel Orientation="Vertical">
         <Button Content="ファイル選択" Click="Button_Click"/>
         <TextBox x:Name="TextArea" TextWrapping="Wrap" Height="410" VerticalScrollBarVisibility="Auto"/>
