@@ -16,7 +16,6 @@ public class WordCounterProcessor : TextProcessor {
 
     protected override void Execute(string line) {
         int index = 0;
-
         while ((index = line.IndexOf(TargetWord, index)) != -1) {
             _count++;
             index += TargetWord.Length;
