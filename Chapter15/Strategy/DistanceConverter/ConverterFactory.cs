@@ -10,6 +10,8 @@ public class ConverterFactory {
     //あらかじめインスタンスを生成し、配列に入れておく
     private readonly static ConverterBase[] _converters = {
         new MeterConverter(),
+        new KilometerConverter(),
+        new MileConverter(),
         new FeetConverter(),
         new YardConverter(),
         new InchConverter(),
