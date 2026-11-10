@@ -20,3 +20,166 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/* AIデザイン演習用の追加スタイル */
+/* ===================================
+   洋風レストランテーマ
+=================================== */
+
+html,
+body {
+    background-color: #f4f6f9;
+    color: #333;
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* ===================================
+   ナビゲーションバー
+=================================== */
+
+.navbar {
+    background-color: #1f3a5f !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.navbar-brand,
+.nav-link {
+    color: white !important;
+    font-weight: 600;
+}
+
+    .nav-link:hover {
+        color: #ffb347 !important;
+    }
+
+/* ===================================
+   タイトル
+=================================== */
+
+.page-title {
+    color: #1f3a5f;
+    font-weight: bold;
+    text-align: center;
+    margin: 30px 0;
+}
+
+/* ===================================
+   商品カード
+=================================== */
+
+.menu-card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    transition: all 0.3s;
+}
+
+    .menu-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+    }
+
+/* ===================================
+   商品画像
+=================================== */
+
+.menu-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+/* ===================================
+   商品名
+=================================== */
+
+.menu-name {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #1f3a5f;
+}
+
+/* ===================================
+   商品説明
+=================================== */
+
+.menu-description {
+    color: #666;
+    font-size: 0.95rem;
+}
+
+/* ===================================
+   価格
+=================================== */
+
+.menu-price {
+    color: #e67e22;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* ===================================
+   注文ボタン
+=================================== */
+
+.order-btn {
+    background-color: #e67e22;
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 10px;
+    width: 100%;
+}
+
+    .order-btn:hover {
+        background-color: #d35400;
+        color: white;
+    }
+
+/* ===================================
+   テーブル
+=================================== */
+
+.table thead {
+    background-color: #1f3a5f;
+    color: white;
+}
+
+/* ===================================
+   フッター
+=================================== */
+
+footer {
+    border-top: 2px solid #1f3a5f;
+    color: #666;
+}
+
+/* ===================================
+   コンテンツエリア
+=================================== */
+
+.main-content {
+    background-color: white;
+    border-radius: 15px;
+    padding: 25px;
+    margin-top: 20px;
+}
+/* 商品写真を一定の高さで表示 */
+.so-product-photo {
+    display: block;
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    background: #f0eee9;
+}
+/* 写真の登録がない商品に表示 */
+.so-product-photo--empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 0.95rem;
+} 
