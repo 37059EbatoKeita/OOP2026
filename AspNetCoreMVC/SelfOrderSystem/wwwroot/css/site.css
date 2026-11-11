@@ -35,3 +35,50 @@ body {
     color: #666;
     font-size: 0.95rem;
 }
+/* レストラン風テーマ */
+body {
+    background: #f8f5ef;
+    font-family: "Yu Gothic UI", "Meiryo", sans-serif;
+}
+
+h1 {
+    font-weight: 700;
+    color: #2c2c2c;
+}
+
+.card {
+    border: none;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    transition: transform .2s ease;
+}
+
+    .card:hover {
+        transform: translateY(-4px);
+    }
+
+.card-body h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #222;
+}
+
+.card-body p {
+    color: #666;
+}
+
+.btn-primary {
+    background: #a05a2c;
+    border-color: #a05a2c;
+}
+
+    .btn-primary:hover {
+        background: #7d4320;
+        border-color: #7d4320;
+    }
+
+.so-product-photo {
+    height: 260px;
+    object-fit: cover;
+}
