@@ -52,6 +52,7 @@
                     <p class="text-muted flex-grow-1">@product.Description</p>
                     <p class="fs-5 fw-bold">@product.Price.ToString("N0") 円</p>
                     <form asp-controller="Cart" asp-action="Add" method="post">
+                        @Html.AntiForgeryToken()
                         <input type="hidden" name="productId" value="@product.Id" />
 
                         @if (product.IsSoldOut) {
