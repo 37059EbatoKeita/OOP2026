@@ -94,17 +94,14 @@ h1 {
         position: relative;
         z-index: 9999;
     }
-    /* =========================
-   カートサイドバー
-    ========================= */
-
-    /* PCではカートをスクロールに追従 */
+    /* PCでカートを追従 */
     @media (min-width: 992px) {
 
         .so-cart-sidebar {
             position: sticky;
             top: 90px;
             z-index: 100;
+            border: 5px solid red;
         }
     }
 }
