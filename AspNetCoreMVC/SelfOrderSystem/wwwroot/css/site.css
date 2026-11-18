@@ -94,14 +94,9 @@ h1 {
         position: relative;
         z-index: 9999;
     }
-    /* PCÇ≈ÉJÅ[ÉgÇí«è] */
-    @media (min-width: 992px) {
-
-        .so-cart-sidebar {
-            position: sticky;
-            top: 90px;
-            z-index: 100;
-            border: 5px solid red;
-        }
+    .so-cart-sidebar {
+        overflow: visible !important;
+        position: sticky;
+        top: 90px;
     }
 }
