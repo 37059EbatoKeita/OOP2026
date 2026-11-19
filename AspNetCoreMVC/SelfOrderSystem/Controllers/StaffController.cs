@@ -1,13 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;      // Controllerを使用 
-using Microsoft.EntityFrameworkCore; // EF Coreの非同期処理を使用 
-using SelfOrderSystem.Data;          // AppDbContextを使用 
-using SelfOrderSystem.Models;
-
+﻿using Microsoft.AspNetCore.Mvc;　　　// Controllerを使用 
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore; // EF Coreの非同期処理を使用
+using Microsoft.Extensions.Logging;
+using SelfOrderSystem.Data;          // AppDbContextを使用 
 using SelfOrderSystem.Hubs;
+using SelfOrderSystem.Models;
+using SelfOrderSystem.Services;
+
+using Microsoft.AspNetCore.Authorization;
 
 namespace SelfOrderSystem.Controllers;
 
+[Authorize(Roles ="Staff")]   //Staff権限の人のみアクセス可
 public class StaffController : Controller {
 
     private readonly AppDbContext _db; // DBへの接続を担当 
@@ -68,7 +72,7 @@ public class StaffController : Controller {
                 .SendAsync("OrderStatusChanged");
 
             // 他の店舗画面にも一覧変更を通知 
-            await _hubContext.Clients.All.SendAsync("OrdersChanged");
+            await _hubContext.Clients.Group("staff").SendAsync("OrdersChanged");
         }
         catch (Exception ex) {
             // 保存した注文状態は取り消さない 
